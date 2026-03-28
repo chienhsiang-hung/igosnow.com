@@ -41,10 +41,16 @@ export default function Home() {
     <main className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center">
       {/* 1. 全螢幕背景影片 (已是 RWD object-cover) */}
       <video
-        autoPlay
-        loop
+        // 1. 順序調整：先靜音和內聯，再自動播放
         muted
         playsInline
+        autoPlay
+        loop
+        preload="metadata" // 幫助瀏覽器提早知道影片資訊
+        aria-hidden="true" // 告訴螢幕閱讀器這是裝飾用影片
+        // 2. 強烈建議加上 poster：在影片載入前或被省電模式阻擋時顯示圖片
+        // 如果沒有 poster，省電模式下背景會是一片黑
+        poster="/hero-poster.jpg" 
         className="absolute top-0 left-0 w-full h-full object-cover -z-20"
       >
         <source src="/hero-bg.webm" type="video/webm" />
