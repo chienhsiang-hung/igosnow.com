@@ -1,67 +1,81 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react'; // 移除 Snowflake，引入 ArrowRight
 import Link from 'next/link';
-const LogoIcon = ({ className }: { className?: string }) => (
+
+// 全新的藍白實體 Logo 元件 (藍白色 #0EA5E9, 白色 #FFFFFF)
+const NewSolidLogo = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
     viewBox="0 0 200 200" 
     fill="none" 
     className={className}
+    aria-hidden="true" // 對螢幕閱讀器隱藏裝飾性 SVG
   >
-    <path d="M 20 100 A 80 80 0 0 1 180 100" stroke="currentColor" strokeWidth="12" strokeLinecap="round"/>
-    <path d="M 35 100 L 75 50 L 105 80 L 135 45 L 175 100" stroke="currentColor" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M 30 130 C 70 180 150 160 180 110" stroke="currentColor" strokeWidth="14" strokeLinecap="round"/>
-    <circle cx="100" cy="100" r="12" fill="currentColor"/>
-    <path d="M 100 125 L 100 155" stroke="currentColor" strokeWidth="14" strokeLinecap="round"/>
-    <path d="M 75 135 L 125 125" stroke="currentColor" strokeWidth="10" strokeLinecap="round"/>
+    {/* 藍色塊面主體 */}
+    <path 
+      d="M 100 20 L 140 60 Q 150 70 140 80 L 100 120 L 60 80 Q 50 70 60 60 Z" 
+      fill="#0EA5E9" 
+    />
+    
+    {/* 下方的藍色實體滑雪板切線 */}
+    <path 
+      d="M 20 120 Q 80 170 180 100 Q 140 160 30 140 C 10 135 15 125 20 120 Z" 
+      fill="#0EA5E9" 
+    />
+    
+    {/* 徽章內的實體白雪山峰 */}
+    <path 
+      d="M 100 35 L 125 65 L 115 75 L 135 95 L 100 115 L 65 95 L 85 75 L 75 65 L 100 35" 
+      fill="#FFFFFF" 
+    />
+    
+    {/* 隱含的 i 元件 (dot) */}
+    <circle cx="100" cy="85" r="10" fill="#FFFFFF" />
   </svg>
 );
 
 export default function Home() {
   return (
     <main className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center">
-      {/* 1. 全螢幕背景影片 - 優化效能與相容性 */}
+      {/* 1. 全螢幕背景影片 (已是 RWD object-cover) */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        aria-hidden="true" // 告訴螢幕閱讀器這是裝飾用影片
-        // 建議上傳一個影片首幀的圖片作為 poster，防止影片加載太慢
-        // poster="/hero-poster.jpg"
         className="absolute top-0 left-0 w-full h-full object-cover -z-20"
       >
-        <source src="/hero-bg.webm" type="video/webm" />
-        你的瀏覽器不支援 HTML5 影片。
+        <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
       {/* 2. 深色遮罩 */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/40 -z-10 backdrop-blur-[2px]" />
 
-      {/* 3. 毛玻璃主視覺卡片 (Glassmorphism) */}
+      {/* 3. 毛玻璃主視覺卡片 (Glassmorphism) - RWD設定: max-w-sm (手機) 到 max-w-lg (電腦) */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
-        className="relative z-10 flex flex-col items-center p-10 rounded-3xl backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl max-w-lg w-full mx-4 text-center"
+        className="relative z-10 flex flex-col items-center p-8 sm:p-10 rounded-3xl backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl max-w-sm sm:max-w-lg w-full mx-4 text-center"
       >
-        {/* 將 Lucide 圖示換成新的 iGoSnow Logo */}
+        {/* 動態進場的 全新藍白實體 Logo */}
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ delay: 0.3, type: 'spring', stiffness: 120, damping: 20 }}
-          className="mb-8" // 增加一點下邊距
+          className="mb-6 sm:mb-8"
         >
-          {/* 直接使用 Tailwind 控制顏色為白色，設定大小 */}
-          <LogoIcon className="w-24 h-24 text-white drop-shadow-md" />
+          {/* Logo 大小設定為 w-24 (手機) 到 w-32 (電腦) */}
+          <NewSolidLogo className="w-24 h-24 sm:w-32 sm:h-32 drop-shadow-lg" />
         </motion.div>
 
-        <h1 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-4 drop-shadow-lg">
+        {/* 標題與標語 RWD設定 */}
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 drop-shadow-md">
           iGoSnow
         </h1>
-        <p className="text-lg md:text-xl text-gray-200 mb-12 font-light tracking-wide max-w-sm">
+        <p className="text-base sm:text-lg lg:text-xl text-gray-200 mb-10 font-light tracking-wide max-w-sm sm:max-w-md mx-auto">
           Your Ultimate Snowboard Hub. <br />
           Experience the rush, master the mountain.
         </p>
@@ -69,23 +83,23 @@ export default function Home() {
         {/* 核心產品入口：導向 Vercel 上的 Gratry 系統 */}
         <Link
           href="https://gratry.igosnow.com"
-          className="group relative flex items-center justify-center gap-3 bg-white text-black px-10 py-5 rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 w-full sm:w-auto"
+          className="group relative flex items-center justify-center gap-3 bg-white text-black px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 w-full sm:w-auto mx-auto"
         >
           <span className="relative z-10 flex items-center gap-2.5">
             Enter Gratry Snow
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" />
           </span>
-          {/* 按鈕的 hover 光暈特效 - 調整得更柔和一些 */}
+          {/* 按鈕的 hover 光暈特效 */}
           <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Link>
       </motion.div>
 
-      {/* 頁面底部的預留版位 (裝飾用，提升平台格局感) */}
+      {/* 頁面底部的 RWD 文字 */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 text-white/40 text-sm font-light tracking-widest uppercase"
+        className="absolute bottom-6 sm:bottom-8 text-white/40 text-xs sm:text-sm font-light tracking-widest uppercase"
       >
         The Gateway to Your Next Snow Adventure
       </motion.div>

@@ -1,10 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-  <path d="M 20 100 A 80 80 0 0 1 180 100" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>
-  <path d="M 35 100 L 75 50 L 105 80 L 135 45 L 175 100" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path 
+    d="M 100 20 L 140 60 Q 150 70 140 80 L 100 120 L 60 80 Q 50 70 60 60 Z" 
+    fill="#0EA5E9" 
+    class="badge-body"
+  />
   
-  <path d="M 30 130 C 70 180 150 160 180 110" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+  <path 
+    d="M 20 120 Q 80 170 180 100 Q 140 160 30 140 C 10 135 15 125 20 120 Z" 
+    fill="#0EA5E9" 
+    class="snowboard-swoosh"
+  />
   
-  <circle cx="100" cy="100" r="12" fill="currentColor"/>
-  <path d="M 100 125 L 100 155" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
-  <path d="M 75 135 L 125 125" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+  <path 
+    d="M 100 35 L 125 65 L 115 75 L 135 95 L 100 115 L 65 95 L 85 75 L 75 65 L 100 35" 
+    fill="#FFFFFF" 
+    class="mountain-peak"
+  />
+  
+  <circle cx="100" cy="85" r="10" fill="#FFFFFF" />
 </svg>
