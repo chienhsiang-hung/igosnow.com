@@ -47,7 +47,7 @@ export default function Home() {
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover -z-20"
       >
-        <source src="/hero-bg.mp4" type="video/mp4" />
+        <source src="/hero-bg.webm" type="video/webm" />
       </video>
 
       {/* 2. 深色遮罩 */}
