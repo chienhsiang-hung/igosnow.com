@@ -33,7 +33,7 @@ export default function Home() {
         // poster="/hero-poster.jpg"
         className="absolute top-0 left-0 w-full h-full object-cover -z-20"
       >
-        <source src="/hero-bg.mp4" type="video/mp4" />
+        <source src="/hero-bg.webm" type="video/webm" />
         你的瀏覽器不支援 HTML5 影片。
       </video>
 
